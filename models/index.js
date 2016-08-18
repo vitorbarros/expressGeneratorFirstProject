@@ -18,6 +18,14 @@ fs.readdirSync(__dirname)
     db[model.name] = model;
   });
 
+Object.keys(db)
+    .forEach(function(model){
+        if(!db[model].hasOwnProperty('associate')){
+            return;
+        }
+        return db[model].associate(db);
+    });
+
 //exportando modulo do sequelize e sua instancia mais os models
 module.exports = lodash.extend({
   Sequelize:Sequelize,
